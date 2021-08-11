@@ -8,7 +8,7 @@ export interface AsyncStorage {
      *
      * Dispatches a storage event on Window objects holding an equivalent Storage object.
      */
-    clear(): Promise<void>;
+    clear(): Promise<this>;
     /**
      * Returns the current value associated with the given key, or null if the given key does not exist.
      */
@@ -22,7 +22,7 @@ export interface AsyncStorage {
      *
      * Dispatches a storage event on Window objects holding an equivalent Storage object.
      */
-    removeItem(key: string): Promise<string | null>;
+    removeItem(key: string): Promise<this>;
     /**
      * Sets the value of the pair identified by key to value, creating a new key/value pair if none existed for key previously.
      *
@@ -30,6 +30,6 @@ export interface AsyncStorage {
      *
      * Dispatches a storage event on Window objects holding an equivalent Storage object.
      */
-    setItem(key: string, value: string): Promise<string | null>;
+    setItem(key: string, value: string): Promise<this>;
     [name: string]: any;
 }

@@ -1,10 +1,6 @@
 import { isNode } from 'browser-or-node';
 import { readFileSync, writeFileSync } from 'fs';
-import { Storage } from '../Contracts';
-
-type Data = {
-    [key: string]: string;
-};
+import { Storage, StorageItem } from '../Contracts';
 
 export class FileStorage implements Storage {
     protected readonly path: string;
@@ -23,7 +19,7 @@ export class FileStorage implements Storage {
         this.setAll({});
     }
 
-    protected getAll(): Data {
+    protected getAll(): StorageItem {
         try {
             const data = JSON.parse(readFileSync(this.path).toString('utf8'));
             if (typeof data === 'object') {
@@ -38,7 +34,7 @@ export class FileStorage implements Storage {
         }
     }
 
-    protected setAll(data: Data) {
+    protected setAll(data: StorageItem) {
         writeFileSync(
             this.path,
             JSON.stringify({
