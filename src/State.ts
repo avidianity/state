@@ -1,29 +1,42 @@
 import { EventBus } from './EventBus';
 import { Key } from './Key';
-
-export type StorageItem = {
-    [key: string]: any;
-};
-
-export type ChangeEvent<T> = (value: T) => void;
+import { isNode } from 'browser-or-node';
+import { ChangeEvent, StateOptions, StorageItem, Storage } from './Contracts';
 
 export class State {
-    protected static instance = new State();
-    protected storage: Storage;
+    protected static instance: State;
+    protected storage: Storage = null as any;
     protected key = 'avidian-state-key';
     protected bus: EventBus;
 
-    constructor(keyOrStorage?: string | Storage) {
-        if (keyOrStorage && keyOrStorage instanceof Storage) {
-            this.storage = keyOrStorage;
-        } else {
-            this.storage = window?.localStorage;
+    constructor(options?: StateOptions | Storage | string) {
+        if (!isNode && window?.localStorage) {
+            this.storage = window.localStorage;
+        } else if (options && typeof options === 'string') {
+            this.key = options;
+        } else if (options && typeof options === 'object') {
+            const opt: any = options;
+            if (opt.getItem) {
+                this.storage = opt;
+            } else {
+                if (opt.key) {
+                    this.key = opt.key;
+                }
+                if (opt.storage) {
+                    this.storage = opt.storage;
+                }
+            }
+        }
+
+        if (!this.storage) {
+            throw new Error('No Storage provided');
+        }
+
+        if (!State.instance) {
+            State.instance = this;
         }
 
         this.bus = new EventBus();
-        if (keyOrStorage && typeof keyOrStorage === 'string') {
-            this.key = keyOrStorage;
-        }
         const data = this.getAll();
         this.setAll({ ...data });
     }

@@ -1,8 +1,3 @@
-import { EventBus } from './EventBus';
-import { Key } from './Key';
-export declare type StorageItem = {
-    [key: string]: any;
-};
 export interface AsyncStorage {
     /**
      * Returns the number of key/value pairs.
@@ -38,24 +33,3 @@ export interface AsyncStorage {
     setItem(key: string, value: string): Promise<string | null>;
     [name: string]: any;
 }
-export declare type ChangeEvent<T> = (value: T) => void;
-export declare class State {
-    protected static instance: State;
-    protected storage: AsyncStorage;
-    protected key: string;
-    protected bus: EventBus;
-    constructor(storage: AsyncStorage, key?: string);
-    setStorage(storage: AsyncStorage): Promise<this>;
-    static getInstance(): State;
-    clear(): Promise<this>;
-    getAll(): Promise<StorageItem>;
-    setAll(data: StorageItem): Promise<this>;
-    has(key: string): Promise<boolean>;
-    get<T = any>(key: string): Promise<T>;
-    set(key: string, value: any): Promise<this>;
-    remove(key: string): Promise<this>;
-    dispatch<T>(key: string, value: T): this;
-    listen<T>(key: string, callback: ChangeEvent<T>): Key;
-    unlisten(key: Key): this;
-}
-export default State;

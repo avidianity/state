@@ -1,15 +1,12 @@
 import { EventBus } from './EventBus';
 import { Key } from './Key';
-export declare type StorageItem = {
-    [key: string]: any;
-};
-export declare type ChangeEvent<T> = (value: T) => void;
+import { ChangeEvent, StateOptions, StorageItem, Storage } from './Contracts';
 export declare class State {
     protected static instance: State;
     protected storage: Storage;
     protected key: string;
     protected bus: EventBus;
-    constructor(keyOrStorage?: string | Storage);
+    constructor(options?: StateOptions | Storage | string);
     setStorage(storage: Storage): this;
     static getInstance(): State;
     clear(): this;
