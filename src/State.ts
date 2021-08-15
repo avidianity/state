@@ -1,5 +1,4 @@
-import { EventBus } from './EventBus';
-import { Key } from './Key';
+import { Manager, Key } from '@avidian/events';
 import { isNode } from 'browser-or-node';
 import { ChangeEvent, StateOptions, StorageItem, Storage } from './Contracts';
 
@@ -7,7 +6,7 @@ export class State {
     protected static instance: State;
     protected storage: Storage = null as any;
     protected key = 'avidian-state-key';
-    protected bus: EventBus;
+    protected bus: Manager;
 
     constructor(options?: StateOptions | Storage | string) {
         if (!isNode && window?.localStorage) {
@@ -36,7 +35,7 @@ export class State {
             State.instance = this;
         }
 
-        this.bus = new EventBus();
+        this.bus = new Manager();
         const data = this.getAll();
         this.setAll({ ...data });
     }

@@ -1,11 +1,10 @@
-import { EventBus } from './EventBus';
-import { Key } from './Key';
+import { Manager, Key } from '@avidian/events';
 import { ChangeEvent, StateOptions, StorageItem, Storage } from './Contracts';
 export declare class State {
     protected static instance: State;
     protected storage: Storage;
     protected key: string;
-    protected bus: EventBus;
+    protected bus: Manager;
     constructor(options?: StateOptions | Storage | string);
     setStorage(storage: Storage): this;
     static getInstance(): State;

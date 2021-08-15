@@ -1,5 +1,3 @@
-import { Observer } from '../Observer';
-
 export * from './Storage';
 export * from './AsyncStorage';
 

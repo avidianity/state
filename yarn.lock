@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@avidian/events@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@avidian/events/-/events-1.0.2.tgz#9689bc5d811ddd6127d44abfdd01c13287f7ae79"
+  integrity sha512-uoCEHuxpVSFrvRhibM6/y6I8eBL/dWYyEk16ICULwVGvA0Xqt6gniQ+TGaUNkym1HUCBgZ4VXyBCOaFzTZPiNg==
+  dependencies:
+    uuid "^8.3.2"
+
 "@babel/cli@^7.14.5":
   version "7.14.8"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.14.8.tgz#fac73c0e2328a8af9fd3560c06b096bfa3730933"

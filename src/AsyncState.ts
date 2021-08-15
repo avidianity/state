@@ -1,12 +1,11 @@
+import { Key, Manager } from '@avidian/events';
 import { AsyncStorage, ChangeEvent, StorageItem } from './Contracts';
-import { EventBus } from './EventBus';
-import { Key } from './Key';
 
 export class AsyncState {
     protected static instance: AsyncState;
     protected storage: AsyncStorage;
     protected key = 'avidian-async-state-key';
-    protected bus: EventBus;
+    protected bus: Manager;
 
     constructor(storage: AsyncStorage, key?: string) {
         this.storage = storage;
@@ -15,7 +14,7 @@ export class AsyncState {
             AsyncState.instance = this;
         }
 
-        this.bus = new EventBus();
+        this.bus = new Manager();
 
         if (key) {
             this.key = key;
