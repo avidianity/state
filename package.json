@@ -1,6 +1,6 @@
 {
     "name": "@avidian/state",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "private": false,
     "description": "Library for handling state in LocalStorage or AsyncStorage.",
     "types": "types/index.d.ts",
