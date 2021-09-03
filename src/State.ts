@@ -5,7 +5,7 @@ import { ChangeEvent, StateOptions, StorageItem, Storage } from './Contracts';
 export class State {
     protected static instance: State;
     protected storage: Storage = null as any;
-    protected key = 'avidian-state-key';
+    protected key = '';
     protected bus: Manager;
 
     constructor(options?: StateOptions | Storage | string) {
@@ -31,6 +31,10 @@ export class State {
             throw new Error('No Storage provided');
         }
 
+        if (this.key.length === 0) {
+            this.key = 'avidian-state-key';
+        }
+
         if (!State.instance) {
             State.instance = this;
         }
@@ -47,6 +51,9 @@ export class State {
     }
 
     static getInstance() {
+        if (!this.instance) {
+            this.instance = new this();
+        }
         return this.instance;
     }
 
