@@ -21,6 +21,10 @@ export class AsyncState {
         }
     }
 
+    async count() {
+        return Object.keys(await this.getAll()).length;
+    }
+
     async setStorage(storage: AsyncStorage) {
         const item = await this.storage.getItem(this.key);
         await storage.setItem(this.key, item || JSON.stringify({}));
@@ -30,7 +34,10 @@ export class AsyncState {
         return this;
     }
 
-    static getInstance() {
+    static getInstance(storage?: AsyncStorage, key?: string) {
+        if (this.instance instanceof this === false && storage) {
+            this.instance = new this(storage, key);
+        }
         return this.instance;
     }
 
@@ -39,8 +46,12 @@ export class AsyncState {
     }
 
     async getAll(): Promise<StorageItem> {
-        const data = await this.storage.getItem(this.key);
-        return data ? JSON.parse(data) : {};
+        try {
+            const data = await this.storage.getItem(this.key);
+            return data ? JSON.parse(data) : {};
+        } catch (_) {
+            return {};
+        }
     }
 
     async setAll(data: StorageItem) {
@@ -53,9 +64,15 @@ export class AsyncState {
         return key in data;
     }
 
-    async get<T = any>(key: string): Promise<T> {
+    async get<T = any>(key: string): Promise<T | null> {
         const data = await this.getAll();
-        return data[key];
+        const value = data[key];
+
+        if (value === undefined) {
+            return null;
+        }
+
+        return value;
     }
 
     async set(key: string, value: any) {

@@ -44,15 +44,19 @@ export class State {
         this.setAll({ ...data });
     }
 
+    count() {
+        return Object.keys(this.getAll()).length;
+    }
+
     setStorage(storage: Storage) {
         storage.setItem(this.key, this.storage.getItem(this.key) || JSON.stringify({}));
 
         return this;
     }
 
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new this();
+    static getInstance(options?: StateOptions | Storage | string) {
+        if (this.instance instanceof this === false) {
+            this.instance = new this(options);
         }
         return this.instance;
     }
@@ -79,8 +83,14 @@ export class State {
         return key in this.getAll();
     }
 
-    get<T = any>(key: string): T {
-        return this.getAll()[key];
+    get<T = any>(key: string): T | null {
+        const value = this.getAll()[key];
+
+        if (value === undefined) {
+            return null;
+        }
+
+        return value;
     }
 
     set(key: string, value: any) {
