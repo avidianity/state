@@ -1,7 +1,6 @@
 import { Storage, StorageItem } from '../Contracts';
 
 export class MemoryStorage implements Storage {
-    protected readonly path: string;
     protected data: any = {};
     [name: string]: any;
 
@@ -9,8 +8,7 @@ export class MemoryStorage implements Storage {
         return Object.keys(this.getAll()).length;
     }
 
-    constructor(path: string) {
-        this.path = path;
+    constructor() {
         this.setAll({});
     }
 

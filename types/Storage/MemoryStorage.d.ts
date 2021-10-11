@@ -1,10 +1,9 @@
 import { Storage, StorageItem } from '../Contracts';
 export declare class MemoryStorage implements Storage {
-    protected readonly path: string;
     protected data: any;
     [name: string]: any;
     get length(): number;
-    constructor(path: string);
+    constructor();
     protected getAll(): StorageItem;
     protected setAll(data: StorageItem): this;
     clear(): this;
