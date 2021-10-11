@@ -2720,6 +2720,13 @@ istanbul-reports@^3.0.2:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
 
+jest-badges@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/jest-badges/-/jest-badges-0.1.3.tgz#d3fdc4b8b8fd8957e959f09dfb88e2220c866add"
+  integrity sha512-7Mc3oacFiSmUi6iDtPT1fAXkjnQhh/q1g3+lUT+Ldz8zwK0ZrNbnE25HHTtfXl5pYZagMseSuNaQj59j3bVYow==
+  dependencies:
+    istanbul-lib-report "^3.0.0"
+
 jest-changed-files@^27.2.5:
   version "27.2.5"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-27.2.5.tgz#9dfd550d158260bcb6fa80aff491f5647f7daeca"

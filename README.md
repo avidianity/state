@@ -1,6 +1,6 @@
 # @avidianity/state
 
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![coverage](coverage/badges/lines.svg)
 
 Library for handling state in LocalStorage or AsyncStorage
 
@@ -76,13 +76,13 @@ const state = new State(new CustomStorage());
 
 ### Asynchronous Storage
 
-Asynchronous state is also supported provided that you implement the `AsyncStorage` interface.
-The API is also the state just like with `State` except that it returns promises.
+Asynchronous state is also supported as long as you provide a storage implements the `AsyncStorage` interface.
+The API is also the same just like with `State` except that it returns promises.
 
 Example (typescript)
 
 ```typescript
-import AsyncState, { AsyncStorage } from '@avidian/state';
+import { AsyncState, AsyncStorage } from '@avidian/state';
 
 class CustomAsyncStorage implements AsyncStorage {
     readonly length: number;
@@ -98,7 +98,7 @@ class CustomAsyncStorage implements AsyncStorage {
     setItem(key: string, value: string): Promise<this>;
 }
 
-const state = new AsyncState(new CustomAsyncStorage());
+const state = new AsyncState(new CustomAsyncStorage(), ?key);
 
 await state.set('key', value);
 await state.remove('key');
@@ -152,15 +152,27 @@ const state = new State(new MemoryStorage());
 ```typescript
 import State, { FileStorage } from '@avidian/state';
 
-const state = new State(new FileStorage());
+const path = '/path/to/file';
+
+const state = new State(new FileStorage(path));
 ```
 
 #### Asynchronous Drivers
 
+##### AsyncMemoryStorage
+
+```typescript
+import { AsyncState, AsyncMemoryStorage } from '@avidian/state';
+
+const state = new AsyncState(new AsyncMemoryStorage());
+```
+
 ##### AsyncFileStorage (Node only)
 
 ```typescript
-import AsyncState, { AsyncFileStorage } from '@avidian/state';
+import { AsyncState, AsyncFileStorage } from '@avidian/state';
 
-const state = new AsyncState(new AsyncFileStorage());
+const path = '/path/to/file';
+
+const state = new AsyncState(new AsyncFileStorage(path));
 ```
