@@ -40,7 +40,7 @@ state.remove('array');
 state.remove('object');
 
 // remove all values
-state.remove();
+state.clear();
 ```
 
 Specifying the storage is also supported
