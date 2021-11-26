@@ -147,16 +147,6 @@ import State, { MemoryStorage } from '@avidian/state';
 const state = new State(new MemoryStorage());
 ```
 
-##### FileStorage (Node only)
-
-```typescript
-import State, { FileStorage } from '@avidian/state';
-
-const path = '/path/to/file';
-
-const state = new State(new FileStorage(path));
-```
-
 #### Asynchronous Drivers
 
 ##### AsyncMemoryStorage
@@ -165,14 +155,4 @@ const state = new State(new FileStorage(path));
 import { AsyncState, AsyncMemoryStorage } from '@avidian/state';
 
 const state = new AsyncState(new AsyncMemoryStorage());
-```
-
-##### AsyncFileStorage (Node only)
-
-```typescript
-import { AsyncState, AsyncFileStorage } from '@avidian/state';
-
-const path = '/path/to/file';
-
-const state = new AsyncState(new AsyncFileStorage(path));
 ```
