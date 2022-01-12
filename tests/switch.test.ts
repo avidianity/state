@@ -12,4 +12,5 @@ it('tests switching of storages', () => {
     state.setStorage(storage2);
 
     expect(state.getStorage().id).toBe(storage2.id);
+    expect(state.getStorage().id === storage1.id).toBeFalsy();
 });
