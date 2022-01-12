@@ -9,17 +9,18 @@ export class State {
     protected bus: Manager;
 
     constructor(options?: StateOptions | Storage | string) {
+        let key = '';
         if (!isNode && window?.localStorage) {
             this.storage = window.localStorage;
         } else if (options && typeof options === 'string') {
-            this.key = options;
+            key = options;
         } else if (options && typeof options === 'object') {
             const opt: any = options;
             if (opt.getItem) {
                 this.storage = opt;
             } else {
                 if (opt.key) {
-                    this.key = opt.key;
+                    key = opt.key;
                 }
                 if (opt.storage) {
                     this.storage = opt.storage;
@@ -31,8 +32,10 @@ export class State {
             throw new Error('No Storage provided');
         }
 
-        if (this.key.length === 0) {
+        if (key.length === 0) {
             this.key = 'avidian-state-key';
+        } else {
+            this.key = key;
         }
 
         if (!State.instance) {
@@ -48,8 +51,14 @@ export class State {
         return Object.keys(this.getAll()).length;
     }
 
+    getStorage() {
+        return this.storage;
+    }
+
     setStorage(storage: Storage) {
         storage.setItem(this.key, this.storage.getItem(this.key) || JSON.stringify({}));
+
+        this.storage = storage;
 
         return this;
     }

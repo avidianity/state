@@ -1,8 +1,11 @@
 import { Storage, StorageItem } from '../Contracts';
+import { v4 } from 'uuid';
 
 export class MemoryStorage implements Storage {
     protected data: any = {};
     [name: string]: any;
+
+    public id = v4();
 
     get length() {
         return Object.keys(this.getAll()).length;
