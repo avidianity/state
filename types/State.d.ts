@@ -6,13 +6,15 @@ export declare class State {
     protected key: string;
     protected bus: Manager;
     constructor(options?: StateOptions | Storage | string);
+    count(): number;
+    getStorage(): Storage;
     setStorage(storage: Storage): this;
-    static getInstance(): State;
+    static getInstance(options?: StateOptions | Storage | string): State;
     clear(): this;
     getAll(): StorageItem;
     setAll(data: StorageItem): this;
     has(key: string): boolean;
-    get<T = any>(key: string): T;
+    get<T = any>(key: string): T | null;
     set(key: string, value: any): this;
     remove(key: string): this;
     dispatch<T>(key: string, value: T): this;

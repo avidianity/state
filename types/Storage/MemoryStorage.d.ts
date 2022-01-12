@@ -2,6 +2,7 @@ import { Storage, StorageItem } from '../Contracts';
 export declare class MemoryStorage implements Storage {
     protected data: any;
     [name: string]: any;
+    id: string;
     get length(): number;
     constructor();
     protected getAll(): StorageItem;
